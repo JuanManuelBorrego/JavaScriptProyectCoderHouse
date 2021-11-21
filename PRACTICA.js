@@ -76,7 +76,7 @@ let nota = problemasResueltos.length
                 document.getElementById("hola").appendChild(pasarAlSegundoNivel)
                 pasarAlSegundoNivel.addEventListener("click",redireccion)
                 function redireccion(){
-                    window.location.href="http://www.google.com"
+                    window.location.href= "./nivel2.html"
                 }
             }         
 
