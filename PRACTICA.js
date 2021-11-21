@@ -162,8 +162,8 @@ function PROBLEMA2(){
              document.getElementById("hola").appendChild(pasarAlSegundoNivel)
              pasarAlSegundoNivel.addEventListener("click",redireccion)
              function redireccion(){
-                 window.location.href="http://www.google.com"
-             }
+                window.location.href= "./nivel2.html"
+            }
             }
 
             //eliminaciones totales en el cuadrante 1
@@ -250,8 +250,8 @@ function PROBLEMA3(){
               document.getElementById("hola").appendChild(pasarAlSegundoNivel)
               pasarAlSegundoNivel.addEventListener("click",redireccion)
               function redireccion(){
-                  window.location.href="http://www.google.com"
-              }
+                window.location.href= "./nivel2.html"
+            }
          } 
             //eliminaciones totales en el cuadrante 1
             let eliminarX = document.getElementById("x")
@@ -340,7 +340,7 @@ function PROBLEMA4(){
                  document.getElementById("hola").appendChild(pasarAlSegundoNivel)
                  pasarAlSegundoNivel.addEventListener("click",redireccion)
                  function redireccion(){
-                     window.location.href="http://www.google.com"
+                    window.location.href= "./nivel2.html"
                  }
             }
 
