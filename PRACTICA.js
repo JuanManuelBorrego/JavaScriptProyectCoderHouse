@@ -1,10 +1,7 @@
-
 function respuestaClick() {
-    let input1 = document.getElementById("nombramiento")
-    let inicio = document.createElement("div")
-    inicio.innerHTML= `BIENVENIDO/A ${input1.value}`
-    document.getElementById("hola").appendChild(inicio)
-    const jugador = JSON.stringify(input1.value)
+    let input1 = $("#nombramiento")
+    $("#hola").append(`<div>BIENVENIDO/A ${input1.val()}</div>`)    
+    const jugador = JSON.stringify(input1.val())
     localStorage.setItem("jugador", jugador)
 }
 
@@ -14,32 +11,66 @@ problemasResueltos = []
 const numeroDeIntentos = []
 
 let nota = problemasResueltos.length
+const notaEnJson = JSON.stringify(nota)
+localStorage.setItem("calificacion", notaEnJson)
 
-//PROBLEMA1
 
-    function PROBLEMA1(){
+function siguiente(){
+    window.location.href= "./ejercicio3.html"
+}
+
+function F2(){ $("#continuar").one("click",function(){
+    window.location.href= "./ejercicio2.html"
+})}
+
+function F3(){
+    $("#continuar").one("click",function(){
+        window.location.href= "./ejercicio3.html"
+    })
+}
+
+function F4(){
+    $("#continuar").one("click",function(){
+        window.location.href= "./ejercicio4.html"
+    })
+}
+   
+function F5(){
+    $("#continuar").one("click", function(){
+        window.location.href="./nivel2.html"
+    })
+}
+
+//PROBLEMA PRINCIPAL
+
+    function PROBLEMA(A,B,C,F){
+    this.A = A.value
+    this.B = B.value
+    this.C = C.value
     //declaración de variables, características y ubicación
     let enunciado= document.createElement("p")
-    enunciado.innerHTML = "4x+7y=26"
+    enunciado.innerHTML = `${A}x+${B}y=${C}`
     document.getElementById("2do").appendChild(enunciado)
     enunciado.setAttribute("id", "enunciado")
     
+    let continuar = document.createElement("button")
+
     var variableX = document.createElement("input")
-    variableX.setAttribute("id", "x")
-    variableX.type= "number"
-    variableX.placeholder="Acá va la X"
-    document.getElementById("3ro").appendChild(variableX)
-
-    let variableY = document.createElement("input")
-    variableY.setAttribute("id", "y")
-    variableY.type= "number"
-    variableY.placeholder="Acá va la Y"
-    document.getElementById("3ro").appendChild(variableY)
-
-    let resultado = document.createElement("button")
-    resultado.setAttribute("id", "resultado")
-    resultado.innerHTML="RESULTADO"
-    document.getElementById("4to").appendChild(resultado)
+        variableX.setAttribute("id", "x")
+        variableX.type= "number"
+        variableX.placeholder="Acá va la X"
+        document.getElementById("3ro").appendChild(variableX)
+    
+        let variableY = document.createElement("input")
+        variableY.setAttribute("id", "y")
+        variableY.type= "number"
+        variableY.placeholder="Acá va la Y"
+        document.getElementById("3ro").appendChild(variableY)
+    
+        let resultado = document.createElement("button")
+        resultado.setAttribute("id", "resultado")
+        resultado.innerHTML="RESULTADO"
+        document.getElementById("4to").appendChild(resultado) 
 
     //creación de la función algebraica con las variables (inputs) ya creadas
     let probando = document.getElementById("resultado")
@@ -47,22 +78,34 @@ let nota = problemasResueltos.length
     function calculo1(){
 
          //if...else de la función creada
-         if(4*(variableX.value) + 7*(variableY.value)!= 26){
+         if(`${A*variableX.value + (B*variableY.value)}` !=`${C}`){
             let Error = document.createElement("p")
-            Error.innerHTML = `Pensá bien, ya que te dio ${(4*variableX.value) + (7*variableY.value)} pero el resultado debe dar 26`
+            Error.innerHTML = `Pensá bien, ya que te dio ${(A*variableX.value) + (B*variableY.value)} pero el resultado debe dar ${C}`
             document.getElementById("hola").appendChild(Error)
             Error.setAttribute("id", "Error")
             numeroDeIntentos.push(Error)
+            const numeroDeIntentosEnJson = JSON.stringify(numeroDeIntentos)
+            localStorage.setItem("Número de intentos", numeroDeIntentos)
         }
-
+        
         else{
             //Creación en el cuadrante 2
             let input1 = document.getElementById("nombramiento")
             let Acierto = document.createElement("p")
-            Acierto.innerHTML= `¡EXCELENTE TU PLANTEO, ${input1.value}! YA RESOLVISTE ${problemasResueltos.length+1} PROBLEMA/S, LO CUAL TOTALIZA EL ${(((problemasResueltos.length+1)/4)*100)}% DE ESTE BLOQUE DE ECUACIONES`
-            document.getElementById("hola").appendChild(Acierto)   
+            Acierto.innerHTML= `¡EXCELENTE TU PLANTEO, ${JSON.parse(localStorage.getItem("jugador"))}!`
+            document.getElementById("hola").appendChild(Acierto)
+            let continuar = document.createElement("button")
+            continuar.innerHTML = "¡Continuemos!"
+            document.getElementById("hola").appendChild(continuar)
+            continuar.setAttribute("id","continuar")
+            F()
+            
+            
+            
+            problemasResueltos.push(Acierto)
+            const numeroDeProblemasResueltosEnJson = JSON.stringify(problemasResueltos.length)
+            localStorage.setItem("Problemas ya resueltos", numeroDeProblemasResueltosEnJson)
             //Calificación por terminar el bloque
-            let nota = problemasResueltos.length
             if(nota==3){
                 //calificación
                 let notaFinal = document.createElement("p")
@@ -79,193 +122,6 @@ let nota = problemasResueltos.length
                     window.location.href= "./nivel2.html"
                 }
             }         
-
-            //eliminaciones totales en el cuadrante 1
-            let eliminarX = document.getElementById("x")
-            let eliminarY = document.getElementById("y")
-            let eliminarEnunciado = document.getElementById("enunciado")
-            let eliminarResultado = document.getElementById("resultado")
-            let eliminarBoton1 = document.getElementById("ejercicio1")
-            
-            eliminarX.parentNode.removeChild(eliminarX)
-            eliminarY.parentNode.removeChild(eliminarY)
-            eliminarEnunciado.parentNode.removeChild(eliminarEnunciado)
-            eliminarResultado.parentNode.removeChild(eliminarResultado)
-            eliminarBoton1.parentNode.removeChild(eliminarBoton1)
-            problemasResueltos.push(PROBLEMA1)
-            numeroDeIntentos.push(Acierto)
-
-
-        }
-
-    }
-
-}
-
-
-//PROBLEMA2
-
-function PROBLEMA2(){
-    //declaración de variables, características y ubicación
-    let enunciado= document.createElement("p")
-    enunciado.innerHTML = "8x+3y=27"
-    document.getElementById("2do").appendChild(enunciado)
-    enunciado.setAttribute("id", "enunciado")
-    
-    var variableX = document.createElement("input")
-    variableX.setAttribute("id", "x")
-    variableX.type= "number"
-    variableX.placeholder="Acá va la X"
-    document.getElementById("3ro").appendChild(variableX)
-
-    let variableY = document.createElement("input")
-    variableY.setAttribute("id", "y")
-    variableY.type= "number"
-    variableY.placeholder="Acá va la Y"
-    document.getElementById("3ro").appendChild(variableY)
-
-    let resultado = document.createElement("button")
-    resultado.setAttribute("id", "resultado")
-    resultado.innerHTML="RESULTADO"
-    document.getElementById("4to").appendChild(resultado)
-
-    //creación de la función algebraica con las variables (inputs) ya creadas
-    let probando = document.getElementById("resultado")
-    probando.addEventListener("click", calculo1)
-    function calculo1(){
-         //if...else de la función creada
-         if(8*(variableX.value) + 3*(variableY.value)!= 27){
-            let Error = document.createElement("p")
-            Error.innerHTML = `Pensá bien, ya que te dio ${(8*variableX.value) + (3*variableY.value)} pero el resultado debe dar 27`
-            document.getElementById("hola").appendChild(Error)
-            Error.setAttribute("class", "Error") 
-            numeroDeIntentos.push(Error)
-        }
-        else{
-            //Creación en el cuadrante 2
-            let input1 = document.getElementById("nombramiento")
-            let Acierto = document.createElement("p")
-            Acierto.innerHTML= `¡EXCELENTE TU PLANTEO, ${input1.value}! YA RESOLVISTE ${problemasResueltos.length+1} PROBLEMA/S, LO CUAL TOTALIZA EL ${(((problemasResueltos.length+1)/4)*100)}% DE ESTE BLOQUE DE ECUACIONES`
-            document.getElementById("hola").appendChild(Acierto)
-            //Calificación por terminar el bloque
-            let nota = problemasResueltos.length
-            if(nota==3){
-            //calificación
-            let notaFinal = document.createElement("p")
-            notaFinal.innerHTML = `FINALIZASTE ESTA PRIMERA SECCIÓN CON UNA NOTA DE ${(6+(4/(numeroDeIntentos.length+1))*4)}`
-            document.getElementById("hola").appendChild(notaFinal)
-            const notaBloque1 = JSON.stringify((6+(4/(numeroDeIntentos.length+1))*4))
-            localStorage.setItem("Calificación del bloque 1", notaBloque1)
-             //acceso al nivel 2
-             let pasarAlSegundoNivel = document.createElement("button")
-             pasarAlSegundoNivel.innerHTML = "NIVEL 2"
-             document.getElementById("hola").appendChild(pasarAlSegundoNivel)
-             pasarAlSegundoNivel.addEventListener("click",redireccion)
-             function redireccion(){
-                window.location.href= "./nivel2.html"
-            }
-            }
-
-            //eliminaciones totales en el cuadrante 1
-            let eliminarX = document.getElementById("x")
-            let eliminarY = document.getElementById("y")
-            let eliminarEnunciado = document.getElementById("enunciado")
-            let eliminarResultado = document.getElementById("resultado")
-            let eliminarBoton2 = document.getElementById("ejercicio2")
-
-
-            eliminarX.parentNode.removeChild(eliminarX)
-            eliminarY.parentNode.removeChild(eliminarY)
-            eliminarEnunciado.parentNode.removeChild(eliminarEnunciado)
-            eliminarResultado.parentNode.removeChild(eliminarResultado)
-            eliminarBoton2.parentNode.removeChild(eliminarBoton2)
-            problemasResueltos.push(PROBLEMA2)
-            numeroDeIntentos.push(Acierto)
-        }
-
-    }
-
-}
-
-
-
-
-//PROBLEMA3
-
-function PROBLEMA3(){
-    //declaración de variables, características y ubicación
-    let enunciado= document.createElement("p")
-    enunciado.innerHTML = "20x+3y=101"
-    document.getElementById("2do").appendChild(enunciado)
-    enunciado.setAttribute("id", "enunciado")
-    
-    var variableX = document.createElement("input")
-    variableX.setAttribute("id", "x")
-    variableX.type= "number"
-    variableX.placeholder="Acá va la X"
-    document.getElementById("3ro").appendChild(variableX)
-
-    let variableY = document.createElement("input")
-    variableY.setAttribute("id", "y")
-    variableY.type= "number"
-    variableY.placeholder="Acá va la Y"
-    document.getElementById("3ro").appendChild(variableY)
-
-    let resultado = document.createElement("button")
-    resultado.setAttribute("id", "resultado")
-    resultado.innerHTML="RESULTADO"
-    document.getElementById("4to").appendChild(resultado)
-
-    //creación de la función algebraica con las variables (inputs) ya creadas
-    let probando = document.getElementById("resultado")
-    probando.addEventListener("click", calculo1)
-    function calculo1(){
-
-         //if...else de la función creada
-         if(20*(variableX.value) + 3*(variableY.value)!= 101){
-            let Error = document.createElement("p")
-            Error.innerHTML = `Pensá bien, ya que te dio ${(20*variableX.value) + (3*variableY.value)} pero el resultado debe dar 101`
-            document.getElementById("hola").appendChild(Error)
-            Error.setAttribute("id", "Error")
-            numeroDeIntentos.push(Error)
-        }
-
-        else{
-            //Creación en el cuadrante 2
-            let input1 = document.getElementById("nombramiento")
-            let Acierto = document.createElement("p")
-            Acierto.innerHTML= `¡EXCELENTE TU PLANTEO, ${input1.value}! YA RESOLVISTE ${problemasResueltos.length+1} PROBLEMA/S, LO CUAL TOTALIZA EL ${(((problemasResueltos.length+1)/4)*100)}% DE ESTE BLOQUE DE ECUACIONES`
-            document.getElementById("hola").appendChild(Acierto)
-            //Calificación por terminar el bloque
-             let nota = problemasResueltos.length
-             if(nota==3){
-             let notaFinal = document.createElement("p")
-             notaFinal.innerHTML = `FINALIZASTE ESTA PRIMERA SECCIÓN CON UNA NOTA DE ${(6+(4/(numeroDeIntentos.length+1))*4)}`
-             document.getElementById("hola").appendChild(notaFinal)
-             const notaBloque1 = JSON.stringify((6+(4/(numeroDeIntentos.length+1))*4))
-             localStorage.setItem("Calificación del bloque 1", notaBloque1)
-              //acceso al nivel 2
-              let pasarAlSegundoNivel = document.createElement("button")
-              pasarAlSegundoNivel.innerHTML = "NIVEL 2"
-              document.getElementById("hola").appendChild(pasarAlSegundoNivel)
-              pasarAlSegundoNivel.addEventListener("click",redireccion)
-              function redireccion(){
-                window.location.href= "./nivel2.html"
-            }
-         } 
-            //eliminaciones totales en el cuadrante 1
-            let eliminarX = document.getElementById("x")
-            let eliminarY = document.getElementById("y")
-            let eliminarEnunciado = document.getElementById("enunciado")
-            let eliminarResultado = document.getElementById("resultado")
-            let eliminarBoton3 = document.getElementById("ejercicio3")
-            
-            eliminarX.parentNode.removeChild(eliminarX)
-            eliminarY.parentNode.removeChild(eliminarY)
-            eliminarEnunciado.parentNode.removeChild(eliminarEnunciado)
-            eliminarResultado.parentNode.removeChild(eliminarResultado)
-            eliminarBoton3.parentNode.removeChild(eliminarBoton3)
-            problemasResueltos.push(PROBLEMA3)
             numeroDeIntentos.push(Acierto)
 
 
@@ -278,113 +134,37 @@ function PROBLEMA3(){
 
 
 
-//PROBLEMA4
 
-function PROBLEMA4(){
-    //declaración de variables, características y ubicación
-    let enunciado= document.createElement("p")
-    enunciado.innerHTML = "15x+43y=88"
-    document.getElementById("2do").appendChild(enunciado)
-    enunciado.setAttribute("id", "enunciado")
-    
-    var variableX = document.createElement("input")
-    variableX.setAttribute("id", "x")
-    variableX.type= "number"
-    variableX.placeholder="Acá va la X"
-    document.getElementById("3ro").appendChild(variableX)
-
-    let variableY = document.createElement("input")
-    variableY.setAttribute("id", "y")
-    variableY.type= "number"
-    variableY.placeholder="Acá va la Y"
-    document.getElementById("3ro").appendChild(variableY)
-
-    let resultado = document.createElement("button")
-    resultado.setAttribute("id", "resultado")
-    resultado.innerHTML="RESULTADO"
-    document.getElementById("4to").appendChild(resultado)
-
-    //creación de la función algebraica con las variables (inputs) ya creadas
-    let probando = document.getElementById("resultado")
-    probando.addEventListener("click", calculo1)
-    function calculo1(){
-
-         //ESTRUCTURA IF...ELSE
-
-         if(15*(variableX.value) + 43*(variableY.value)!= 88){
-            let Error = document.createElement("p")
-            Error.innerHTML = `Pensá bien, ya que te dio ${(15*variableX.value) + (43*variableY.value)} pero el resultado debe dar 88`
-            document.getElementById("hola").appendChild(Error)
-            numeroDeIntentos.push(Error)
-            
-        }
-
-        else{
-            //CREACIÓN EN EL CUADRANTE 2
-            //Felicitaciones por el ejercicio resuelto
-            let input1 = document.getElementById("nombramiento")
-            let Acierto = document.createElement("p")
-            Acierto.innerHTML= `¡EXCELENTE TU PLANTEO, ${input1.value}! YA RESOLVISTE ${problemasResueltos.length+1} PROBLEMA/S, LO CUAL TOTALIZA EL ${(((problemasResueltos.length+1)/4)*100)}% DE ESTE BLOQUE DE ECUACIONES`
-            document.getElementById("hola").appendChild(Acierto)
-            //Calificación por terminar el bloque
-            let nota = problemasResueltos.length
-            if(nota==3){
-                let notaFinal = document.createElement("p")
-                notaFinal.innerHTML = `FINALIZASTE ESTA PRIMERA SECCIÓN CON UNA NOTA DE ${(6+(4/(numeroDeIntentos.length+1))*4)}`
-                document.getElementById("hola").appendChild(notaFinal)
-                const notaBloque1 = JSON.stringify((6+(4/(numeroDeIntentos.length+1))*4))
-                localStorage.setItem("Calificación del bloque 1", notaBloque1)
-                 //acceso al nivel 2
-                 let pasarAlSegundoNivel = document.createElement("button")
-                 pasarAlSegundoNivel.innerHTML = "NIVEL 2"
-                 document.getElementById("hola").appendChild(pasarAlSegundoNivel)
-                 pasarAlSegundoNivel.addEventListener("click",redireccion)
-                 function redireccion(){
-                    window.location.href= "./nivel2.html"
-                 }
-            }
-
-            //ELIMINACIONES EN EL CUADRANTE 1
-            let eliminarX = document.getElementById("x")
-            let eliminarY = document.getElementById("y")
-            let eliminarEnunciado = document.getElementById("enunciado")
-            let eliminarResultado = document.getElementById("resultado")
-            let eliminarBoton4 = document.getElementById("ejercicio4")
-            
-            eliminarX.parentNode.removeChild(eliminarX)
-            eliminarY.parentNode.removeChild(eliminarY)
-            eliminarEnunciado.parentNode.removeChild(eliminarEnunciado)
-            eliminarResultado.parentNode.removeChild(eliminarResultado)
-            eliminarBoton4.parentNode.removeChild(eliminarBoton4)
-
-            //PUSHEOS A LOS ARRAYS
-            problemasResueltos.push(PROBLEMA4)
-            numeroDeIntentos.push(Acierto)
-        }
-
-    }
-}
 
 
 //EVENTOS
+{
+$("#confirmar").on("click", function(){
+    respuestaClick()
+})
+}
 
-let nombre = document.getElementById("confirmar")
-nombre.addEventListener("click", respuestaClick)
-
-let problema1 = document.getElementById("ejercicio1")
-problema1.addEventListener("click", PROBLEMA1)
-
-let Problema2 = document.getElementById("ejercicio2")
-Problema2.addEventListener("click", PROBLEMA2)
-
-let Problema3 = document.getElementById("ejercicio3")
-Problema3.addEventListener("click", PROBLEMA3)
-
-let Problema4 = document.getElementById("ejercicio4")
-Problema4.addEventListener("click", PROBLEMA4)
+{
+$("#ejercicio1").one("click",function(){
+    PROBLEMA(4,7,26,F2)
+})
+}
 
 
+$("#ejercicio2").one("click",function(){
+    PROBLEMA(8,3,27,F3)
+})
 
+$("#ejercicio3").one("click", function(){
+    PROBLEMA(20,3,101,F4)
+})
 
+$("#ejercicio4").one("click", function(){
+    PROBLEMA(15,17,62,F5)
+})
+
+$("body").fadeIn(800)
+
+const datosNombre = JSON.parse(localStorage.getItem("jugador"))
 
 

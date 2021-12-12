@@ -1,0 +1,13 @@
+[
+    {
+        "nivel": "1",
+        "contenido": "una sola ecuación lineal por vez",
+        "cantidad de variables": "2"
+    },
+
+    {
+        "nivel":"2",
+        "contenido":"sistema de ecuaciones lineales con dos ecuaciones",
+        "variables":"2"
+    }
+]
