@@ -1,18 +1,17 @@
-$("body").fadeIn(800)
 
 
+const URLGET = "./ejercicios.json"
 
-$("#programa").on("click",(e)=>{
-    $.getJSON("./ejercicios.json",(respuesta, status)=>{
+$("body").prepend(`<button id="btn1">JSON</button>`)
+
+$("#btn1").click(()=>{
+    $.getJSON(URLGET,(respuesta, status)=>{
         if(status==="success"){
-            respuesta.forEach((contenidos) => {
-                $(".container-fluid").appendChild(`<li>${contenidos.nivel}-${contenidos.contenido}-${contenidos.variables}</li>`);
-            });
-        }
+        console.log(respuesta.nivel)}
     })
 })
-
-
+        
+$("body").fadeIn(800)
 problemasResueltos = []
 
 const numeroDeIntentos = []
@@ -131,4 +130,3 @@ const datosNombre = JSON.parse(localStorage.getItem("jugador"))
 let tomarNombre = document.createElement("p")
 tomarNombre.innerHTML = datosNombre
 document.getElementById("recuperandoMemoria").appendChild(tomarNombre)
-
