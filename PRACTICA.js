@@ -1,18 +1,14 @@
+
+notasParciales = []
+
+const numeroDeIntentos = []
+
 function respuestaClick() {
     let input1 = $("#nombramiento")
     $("#hola").append(`<div>BIENVENIDO/A ${input1.val()}</div>`)    
     const jugador = JSON.stringify(input1.val())
     localStorage.setItem("jugador", jugador)
 }
-
-
-problemasResueltos = []
-
-const numeroDeIntentos = []
-
-let nota = problemasResueltos.length
-const notaEnJson = JSON.stringify(nota)
-localStorage.setItem("calificacion", notaEnJson)
 
 
 function siguiente(){
@@ -47,6 +43,7 @@ function F5(){
     this.A = A.value
     this.B = B.value
     this.C = C.value
+    this.F = F
     //declaración de variables, características y ubicación
     let enunciado= document.createElement("p")
     enunciado.innerHTML = `${A}x+${B}y=${C}`
@@ -69,67 +66,66 @@ function F5(){
     
         let resultado = document.createElement("button")
         resultado.setAttribute("id", "resultado")
-        resultado.innerHTML="RESULTADO"
+        resultado.innerHTML="¿=?"
         document.getElementById("4to").appendChild(resultado) 
 
     //creación de la función algebraica con las variables (inputs) ya creadas
     let probando = document.getElementById("resultado")
     probando.addEventListener("click", calculo1)
     function calculo1(){
-
          //if...else de la función creada
          if(`${A*variableX.value + (B*variableY.value)}` !=`${C}`){
             let Error = document.createElement("p")
             Error.innerHTML = `Pensá bien, ya que te dio ${(A*variableX.value) + (B*variableY.value)} pero el resultado debe dar ${C}`
-            document.getElementById("hola").appendChild(Error)
+            swal ( "UFFF..." ,  Error.innerHTML ,  "error" )
             Error.setAttribute("id", "Error")
             numeroDeIntentos.push(Error)
             const numeroDeIntentosEnJson = JSON.stringify(numeroDeIntentos)
-            localStorage.setItem("Número de intentos", numeroDeIntentos)
+            sessionStorage.setItem("Número de intentos", numeroDeIntentos)
         }
         
         else{
             //Creación en el cuadrante 2
-            let input1 = document.getElementById("nombramiento")
             let Acierto = document.createElement("p")
             Acierto.innerHTML= `¡EXCELENTE TU PLANTEO, ${JSON.parse(localStorage.getItem("jugador"))}!`
-            document.getElementById("hola").appendChild(Acierto)
+            document.getElementById("4to").appendChild(Acierto)
             let continuar = document.createElement("button")
             continuar.innerHTML = "¡Continuemos!"
-            document.getElementById("hola").appendChild(continuar)
+            document.getElementById("6to").appendChild(continuar)
             continuar.setAttribute("id","continuar")
-            F()
+            let borrarBotonResultado = document.getElementById("resultado")
+            borrarBotonResultado.parentNode.removeChild(borrarBotonResultado)
+            if(F==1){
+                F2()
+                const nota1 = JSON.stringify((6+(1/(numeroDeIntentos.length+1))*4))
+                localStorage.setItem("Calificación 1", nota1)
+            }
+            else if(F==2){
+                F3()
+                const nota2 = JSON.stringify((6+(1/(numeroDeIntentos.length+1))*4))
+                localStorage.setItem("Calificación 2", nota2)
+            }
+            else if (F==3) {
+                F4()
+                const nota3 = JSON.stringify((6+(1/(numeroDeIntentos.length+1))*4))
+                localStorage.setItem("Calificación 3", nota3)
+            } 
+            else if (F==4) {
+                F5()
+                const nota4 = JSON.stringify((6+(1/(numeroDeIntentos.length+1))*4))
+                localStorage.setItem("Calificación 4", nota4)
+            }
             
-            
-            
-            problemasResueltos.push(Acierto)
-            const numeroDeProblemasResueltosEnJson = JSON.stringify(problemasResueltos.length)
-            localStorage.setItem("Problemas ya resueltos", numeroDeProblemasResueltosEnJson)
-            //Calificación por terminar el bloque
-            if(nota==3){
                 //calificación
-                let notaFinal = document.createElement("p")
-                notaFinal.innerHTML = `FINALIZASTE ESTA PRIMERA SECCIÓN CON UNA NOTA DE ${(6+(4/(numeroDeIntentos.length+1))*4)}`
-                document.getElementById("hola").appendChild(notaFinal)
-                const notaBloque1 = JSON.stringify((6+(4/(numeroDeIntentos.length+1))*4))
-                localStorage.setItem("Calificación del bloque 1", notaBloque1)
-                //acceso al nivel 2
-                let pasarAlSegundoNivel = document.createElement("button")
-                pasarAlSegundoNivel.innerHTML = "NIVEL 2"
-                document.getElementById("hola").appendChild(pasarAlSegundoNivel)
-                pasarAlSegundoNivel.addEventListener("click",redireccion)
-                function redireccion(){
-                    window.location.href= "./nivel2.html"
-                }
-            }         
-            numeroDeIntentos.push(Acierto)
-
-
-        }
-
+                let notaParcial = document.createElement("p")
+                notaParcial.innerHTML = `OBTUVISTE UNA NOTA DE ${(6+(1/((numeroDeIntentos.length)+1))*4)}`
+                document.getElementById("hola").appendChild(notaParcial)
+                        
+                
+            }
+        }       
     }
 
-}
 
 
 
@@ -146,25 +142,24 @@ $("#confirmar").on("click", function(){
 
 {
 $("#ejercicio1").one("click",function(){
-    PROBLEMA(4,7,26,F2)
+    PROBLEMA(4,7,26,1)
 })
 }
 
 
 $("#ejercicio2").one("click",function(){
-    PROBLEMA(8,3,27,F3)
+    PROBLEMA(8,3,27,2)
 })
 
 $("#ejercicio3").one("click", function(){
-    PROBLEMA(20,3,101,F4)
+    PROBLEMA(20,3,101,3)
 })
 
 $("#ejercicio4").one("click", function(){
-    PROBLEMA(15,17,62,F5)
+    PROBLEMA(15,17,62,4)
 })
 
 $("body").fadeIn(800)
 
 const datosNombre = JSON.parse(localStorage.getItem("jugador"))
-
 

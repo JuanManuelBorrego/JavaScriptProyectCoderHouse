@@ -1,8 +1,7 @@
-const URLGET = "http://ejercicios.json"
-
+const URLGET = "ejercicios.json"
 $("#programa").click(()=>{
     $.getJSON(URLGET,(respuesta, status)=>{
-        if(status==="success"){
-        console.log(respuesta.nivel)}
+        if(status==="success")
+        console.log(respuesta)
     })
 })
