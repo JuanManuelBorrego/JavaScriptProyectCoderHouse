@@ -1,0 +1,55 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+h1{
+    color: brown;
+    display: flex;
+    justify-content: center;
+}
+
+header {
+    height: 50px;
+    background-color: black;
+}
+
+body{
+    background-image: url(./presentación.jpeg);
+    background-size: cover;
+}
+
+footer {
+    height: 50px;
+    background-color: black;
+    color: blanchedalmond;
+    text-align: center;
+    height: auto;
+    font-style: sans-serif;
+    font-size: 12px;
+}
+
+p, h1{
+    text-align: center;
+    margin-top: 40px;
+    font-weight: bold;
+    font-family: cursive;
+    color: blanchedalmond;
+}
+
+.derechos{
+    margin: 0px;
+}
+
+article{
+    display: flex;
+}
+
+#confirmar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0px;
+    background-color: rgb(67, 114, 20);
+}
+
