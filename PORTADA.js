@@ -8,6 +8,6 @@ function respuestaClick() {
 {
 $("#confirmar").on("click", function(){
     respuestaClick()
-    window.location.href= "./ejercicio1.html"
+    window.location.href= "./introduccion.html"
 })
 }

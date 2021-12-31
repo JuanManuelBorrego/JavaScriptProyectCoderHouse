@@ -83,14 +83,14 @@ function F5(){
             const numeroDeIntentosEnJson = JSON.stringify(numeroDeIntentos)
             sessionStorage.setItem("Número de intentos", numeroDeIntentos)
         }
-        
+       
         else{
             //Creación en el cuadrante 2
             let Acierto = document.createElement("p")
             Acierto.innerHTML= `¡EXCELENTE TU PLANTEO, ${JSON.parse(localStorage.getItem("jugador"))}!`
             document.getElementById("4to").appendChild(Acierto)
             let continuar = document.createElement("button")
-            continuar.innerHTML = "¡Continuemos!"
+            continuar.innerHTML = "=>"
             document.getElementById("6to").appendChild(continuar)
             continuar.setAttribute("id","continuar")
             let borrarBotonResultado = document.getElementById("resultado")

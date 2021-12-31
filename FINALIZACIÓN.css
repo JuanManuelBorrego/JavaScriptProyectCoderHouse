@@ -1,0 +1,57 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.row {
+    height: 25vh;
+}
+
+
+h6, h4{
+    text-align: center;
+    margin-top: 40px;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+#fondoDiploma {
+    background-color: blanchedalmond;
+    border: double black 15px;
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+}
+
+#fondoFinal {
+    background-image: url(./final.jpeg);
+    background-position: center;
+    background-size: cover;
+}
+
+.jugador {
+    font-weight: bold;
+}
+
+
+#titulo {
+    font-weight: bold;
+    color: sienna;
+    font-family: cursive;
+    margin-top: 10vh;
+}
+
+header, footer {
+    background-color: black;
+    height: 10vh;
+}
+
+
+
+.derechos {
+    color: blanchedalmond;
+    text-align: center;
+    height: auto;
+    font-style: sans-serif;
+    font-size: 12px;
+}
